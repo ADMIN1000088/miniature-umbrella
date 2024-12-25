@@ -1,118 +1,176 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
-    <title>首页</title>
+    <title>数据展示页面</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, lightblue, white);
             font-family: Arial, sans-serif;
-            margin: 20px;
+            min-height: 100vh;
+            position: relative;
         }
+
         .container {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            width: 80%;
+            max-width: 1200px;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
         }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .header > div {
-            display: flex;
-            flex-direction: column;
-        }
-        .header > div > span:first-child {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .header > div > span:last-child {
-            font-size: 1.5em;
-            color: #333;
-        }
-        #adminButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            padding: 15px 25px;
-            font-size: 1em;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b);
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
-        #adminButton:hover {
-            background: linear-gradient(45deg, #feb47b, #ff7e5f);
-        }
-        .data {
-            margin-top: 50px;
-        }
-        .data > div {
+
+        header {
+            text-align: center; /* 居中标题 */
             margin-bottom: 20px;
         }
-        .data > div > span:first-child {
-            font-weight: bold;
+
+        h1 {
+            color: #333;
+            margin: 0;
         }
-        .data > div > span:last-child {
-            margin-left: 10px;
+
+        .data-block {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .data-box {
+            width: 48%;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* 居中内容 */
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .data-box:hover {
+            transform: translateY(-5px);
+            background-color: #e0e0e0;
+        }
+
+        .data-box h3 {
+            margin-top: 0;
+            color: #007bff;
+            text-align: center; /* 居中标题 */
+            width: 100%;
+        }
+
+        .data-box p {
+            font-size: 2em;
+            margin: 10px 0 0;
+            color: #333;
+            text-align: center; /* 居中数字 */
+        }
+
+        .login-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        button,
+        .login-link {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(to right, #007bff, #00bfff);
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover,
+        .login-link:hover {
+            background: linear-gradient(to right, #0056b3, #00a6e6);
+        }
+
+        @media (max-width: 768px) {
+            .data-block {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .data-box {
+                width: 80%;
+            }
+
+            .login-button {
+                position: static;
+                margin-top: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .data-box {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .data-box p {
+                font-size: 1.5em;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="header">
-        <div>
-            <span>今日收入</span>
-            <span id="todayIncome">0.00</span>
-        </div>
-        <div>
-            <span>本月收入</span>
-            <span id="monthIncome">0.00</span>
-        </div>
-        <div>
-            <span>累计收入</span>
-            <span id="totalIncome">0.00</span>
-        </div>
-        <div>
-            <span>激活卡数</span>
-            <span id="activatedCards">0</span>
-        </div>
-        <div>
-            <span>累计激活数量</span>
-            <span id="totalActivated">0</span>
-        </div>
-        <div>
-            <span>订单</span>
-            <span id="orders">0</span>
-        </div>
+    <div class="container">
+        <header>
+            <h1>数据概况</h1>
+        </header>
+        <main>
+            <div class="data-block">
+                <div class="data-box">
+                    <h3>今日收入</h3>
+                    <p>0.00</p>
+                </div>
+                <div class="data-box">
+                    <h3>今日订单</h3>
+                    <p>0</p>
+                </div>
+            </div>
+            <div class="data-block">
+                <div class="data-box">
+                    <h3>本月收入</h3>
+                    <p>0.00</p>
+                </div>
+                <div class="data-box">
+                    <h3>本月订单</h3>
+                    <p>0</p>
+                </div>
+            </div>
+            <div class="data-block">
+                <div class="data-box">
+                    <h3>累计收入</h3>
+                    <p>0.00</p>
+                </div>
+                <div class="data-box">
+                    <h3>累计订单</h3>
+                    <p>0</p>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <div class="login-button">
+                <a href="登录界面.html" class="login-link">管理员登录</a>
+            </div>
+        </footer>
     </div>
-
-    <button id="adminButton">管理员登录</button>
-
-    <script>
-        // 读取数据
-        const data = JSON.parse(localStorage.getItem('data')) || {
-            todayIncome: 0.00,
-            monthIncome: 0.00,
-            totalIncome: 0.00,
-            activatedCards: 0,
-            totalActivated: 0,
-            orders: 0
-        };
-
-        // 显示数据
-        document.getElementById('todayIncome').textContent = data.todayIncome.toFixed(2);
-        document.getElementById('monthIncome').textContent = data.monthIncome.toFixed(2);
-        document.getElementById('totalIncome').textContent = data.totalIncome.toFixed(2);
-        document.getElementById('activatedCards').textContent = data.activatedCards;
-        document.getElementById('totalActivated').textContent = data.totalActivated;
-        document.getElementById('orders').textContent = data.orders;
-
-        // 管理员登录按钮点击事件
-        document.getElementById('adminButton').addEventListener('click', () => {
-            window.location.href = '登录界面.html';
-        });
-    </script>
 </body>
+
 </html>
