@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>管理员后台</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .formGroup {
+            margin-bottom: 20px;
+        }
+        .formGroup label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .formGroup input, .formGroup select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff7e5f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #feb47b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>管理员后台</h2>
+        <div class="formGroup">
+            <label for="todayIncome">今日收入</label>
+            <input type="number" id="todayIncome" step="0.01" placeholder="请输入今日收入">
+        </div>
+        <div class="formGroup">
+            <label for="monthIncome">本月收入</label>
+            <input type="number" id="monthIncome" step="0.01" placeholder="请输入本月收入">
+        </div>
+        <div class="formGroup">
+            <label for="totalIncome">累计收入</label>
+            <input type="number" id="totalIncome" step="0.01" placeholder="请输入累计收入">
+        </div>
+        <div class="formGroup">
+            <label for="activatedCards">激活卡数</label>
+            <input type="number" id="activatedCards" placeholder="请输入激活卡数">
+        </div>
+        <div class="formGroup">
+            <label for="totalActivated">累计激活数量</label>
+            <input type="number" id="totalActivated" placeholder="请输入累计激活数量">
+        </div>
+        <div class="formGroup">
+            <label for="orders">订单</label>
+            <input type="number" id="orders" placeholder="请输入订单数">
+        </div>
+        <button onclick="saveData()">保存</button>
+    </div>
+
+    <script>
+        // 读取当前数据
+        const data = JSON.parse(localStorage.getItem('data')) || {
+            todayIncome: 0.00,
+            monthIncome: 0.00,
+            totalIncome: 0.00,
+            activatedCards: 0,
+            totalActivated: 0,
+            orders: 0
+        };
+
+        // 填充表单
+        document.getElementById('todayIncome').value = data.todayIncome;
+        document.getElementById('monthIncome').value = data.monthIncome;
+        document.getElementById('totalIncome').value = data.totalIncome;
+        document.getElementById('activatedCards').value = data.activatedCards;
+        document.getElementById('totalActivated').value = data.totalActivated;
+        document.getElementById('orders').value = data.orders;
+
+        function saveData() {
+            const newData = {
+                todayIncome: parseFloat(document.getElementById('todayIncome').value) || 0.00,
+                monthIncome: parseFloat(document.getElementById('monthIncome').value) || 0.00,
+                totalIncome: parseFloat(document.getElementById('totalIncome').value) || 0.00,
+                activatedCards: parseInt(document.getElementById('activatedCards').value) || 0,
+                totalActivated: parseInt(document.getElementById('totalActivated').value) || 0,
+                orders: parseInt(document.getElementById('orders').value) || 0
+            };
+
+            localStorage.setItem('data', JSON.stringify(newData));
+            alert('数据已保存');
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
