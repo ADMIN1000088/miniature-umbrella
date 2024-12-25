@@ -5,105 +5,125 @@
     <title>管理员后台</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background: linear-gradient(to bottom, #40E0D0, #FFFFFF);
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-family: Arial, sans-serif;
-            margin: 20px;
         }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+
+        .admin-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 810px;
+            box-sizing: border-box;
+            /* 增加顶部外边距 */
+            margin-top: 50px; /* 您可以根据需要调整这个值 */
+            /* 或者使用内边距 */
+            /* padding-top: 30px; */
         }
-        .formGroup {
-            margin-bottom: 20px;
+
+        .admin-container h2 {
+            margin: 0 0 30px 0;
+            text-align: center;
+            color: #333;
+            font-size: 2em;
         }
-        .formGroup label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .formGroup input, .formGroup select {
+
+        .admin-container input {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 15px;
+            margin: 15px 0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1.2em;
+            box-sizing: border-box;
         }
-        button {
+
+        .admin-container button {
             width: 100%;
-            padding: 10px;
-            background-color: #ff7e5f;
+            padding: 15px;
+            background: linear-gradient(to right, #00CED1, #1E90FF);
             color: white;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-size: 1.2em;
+            transition: background 0.3s;
         }
-        button:hover {
-            background-color: #feb47b;
+
+        .admin-container button:hover {
+            background: linear-gradient(to right, #1E90FF, #00CED1);
+        }
+
+        /* 响应式设计（可选） */
+        @media (max-width: 500px) {
+            .admin-container {
+                width: 90%;
+                padding: 30px 20px;
+                margin-top: 30px; /* 根据需要调整 */
+            }
+
+            .admin-container h2 {
+                font-size: 1.5em;
+            }
+
+            .admin-container input, .admin-container button {
+                font-size: 1em;
+                padding: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="admin-container">
         <h2>管理员后台</h2>
-        <div class="formGroup">
-            <label for="todayIncome">今日收入</label>
-            <input type="number" id="todayIncome" step="0.01" placeholder="请输入今日收入">
-        </div>
-        <div class="formGroup">
-            <label for="monthIncome">本月收入</label>
-            <input type="number" id="monthIncome" step="0.01" placeholder="请输入本月收入">
-        </div>
-        <div class="formGroup">
-            <label for="totalIncome">累计收入</label>
-            <input type="number" id="totalIncome" step="0.01" placeholder="请输入累计收入">
-        </div>
-        <div class="formGroup">
-            <label for="activatedCards">激活卡数</label>
-            <input type="number" id="activatedCards" placeholder="请输入激活卡数">
-        </div>
-        <div class="formGroup">
-            <label for="totalActivated">累计激活数量</label>
-            <input type="number" id="totalActivated" placeholder="请输入累计激活数量">
-        </div>
-        <div class="formGroup">
-            <label for="orders">订单</label>
-            <input type="number" id="orders" placeholder="请输入订单数">
-        </div>
+        <input type="text" id="todayIncome" placeholder="今日收入">
+        <input type="text" id="todayOrders" placeholder="今日订单">
+        <input type="text" id="monthIncome" placeholder="本月收入">
+        <input type="text" id="monthOrders" placeholder="本月订单">
+        <input type="text" id="totalIncome" placeholder="累计收入">
+        <input type="text" id="totalOrders" placeholder="累计订单">
+        <!-- 根据需要添加更多输入框 -->
         <button onclick="saveData()">保存</button>
     </div>
 
     <script>
-        // 读取当前数据
-        const data = JSON.parse(localStorage.getItem('data')) || {
-            todayIncome: 0.00,
-            monthIncome: 0.00,
-            totalIncome: 0.00,
-            activatedCards: 0,
-            totalActivated: 0,
-            orders: 0
-        };
-
-        // 填充表单
-        document.getElementById('todayIncome').value = data.todayIncome;
-        document.getElementById('monthIncome').value = data.monthIncome;
-        document.getElementById('totalIncome').value = data.totalIncome;
-        document.getElementById('activatedCards').value = data.activatedCards;
-        document.getElementById('totalActivated').value = data.totalActivated;
-        document.getElementById('orders').value = data.orders;
-
         function saveData() {
-            const newData = {
-                todayIncome: parseFloat(document.getElementById('todayIncome').value) || 0.00,
-                monthIncome: parseFloat(document.getElementById('monthIncome').value) || 0.00,
-                totalIncome: parseFloat(document.getElementById('totalIncome').value) || 0.00,
-                activatedCards: parseInt(document.getElementById('activatedCards').value) || 0,
-                totalActivated: parseInt(document.getElementById('totalActivated').value) || 0,
-                orders: parseInt(document.getElementById('orders').value) || 0
-            };
+            const todayIncome = document.getElementById('todayIncome').value.trim();
+            const todayOrders = document.getElementById('todayOrders').value.trim();
+            const monthIncome = document.getElementById('monthIncome').value.trim();
+            const monthOrders = document.getElementById('monthOrders').value.trim();
+            const totalIncome = document.getElementById('totalIncome').value.trim();
+            const totalOrders = document.getElementById('totalOrders').value.trim();
 
-            localStorage.setItem('data', JSON.stringify(newData));
-            alert('数据已保存');
-            window.location.href = 'index.html';
+            // 保存数据到 localStorage
+            localStorage.setItem('todayIncome', todayIncome);
+            localStorage.setItem('todayOrders', todayOrders);
+            localStorage.setItem('monthIncome', monthIncome);
+            localStorage.setItem('monthOrders', monthOrders);
+            localStorage.setItem('totalIncome', totalIncome);
+            localStorage.setItem('totalOrders', totalOrders);
+
+            // 提示保存成功
+            alert('已保存数据，请返回查看');
+
+            // 刷新页面以显示最新数据
+            window.location.reload();
         }
+
+        // 初始化输入框
+        document.getElementById('todayIncome').value = localStorage.getItem('todayIncome') || '';
+        document.getElementById('todayOrders').value = localStorage.getItem('todayOrders') || '';
+        document.getElementById('monthIncome').value = localStorage.getItem('monthIncome') || '';
+        document.getElementById('monthOrders').value = localStorage.getItem('monthOrders') || '';
+        document.getElementById('totalIncome').value = localStorage.getItem('totalIncome') || '';
+        document.getElementById('totalOrders').value = localStorage.getItem('totalOrders') || '';
     </script>
 </body>
 </html>
