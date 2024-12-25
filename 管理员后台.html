@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>面板数据管理后台</title>
+    <title>管理员后台</title>
     <style>
         body {
             margin: 0;
@@ -20,12 +20,9 @@
             padding: 40px 50px;
             border-radius: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            width: 810px;
+            width: 820px;
             box-sizing: border-box;
-            /* 增加顶部外边距 */
-            margin-top: 50px; /* 您可以根据需要调整这个值 */
-            /* 或者使用内边距 */
-            /* padding-top: 30px; */
+            margin-top: 50px; /* 调整与顶部的距离 */
         }
 
         .admin-container h2 {
@@ -37,23 +34,24 @@
 
         .admin-container input {
             width: 100%;
-            padding: 15px;
-            margin: 15px 0;
+            padding: 40px; /* 增加内边距以增加高度 */
+            margin: 20px 0; /* 增加外边距 */
             border: 2px solid #ccc;
             border-radius: 8px;
-            font-size: 1.2em;
+            font-size: 2.4em; /* 放大字体 */
             box-sizing: border-box;
+            height: auto; /* 允许高度根据内容自动调整 */
         }
 
         .admin-container button {
             width: 100%;
-            padding: 15px;
+            padding: 20px; /* 增加内边距以增加高度 */
             background: linear-gradient(to right, #00CED1, #1E90FF);
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            font-size: 1.2em;
+            font-size: 2.4em; /* 放大字体 */
             transition: background 0.3s;
         }
 
@@ -66,7 +64,7 @@
             .admin-container {
                 width: 90%;
                 padding: 30px 20px;
-                margin-top: 30px; /* 根据需要调整 */
+                margin-top: 30px;
             }
 
             .admin-container h2 {
@@ -75,7 +73,7 @@
 
             .admin-container input, .admin-container button {
                 font-size: 1em;
-                padding: 12px;
+                padding: 15px;
             }
         }
     </style>
