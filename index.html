@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
     <meta charset="UTF-8">
     <title>数据展示页面</title>
     <style>
+        /* 您的样式代码保持不变 */
         body {
             margin: 0;
             padding: 0;
@@ -26,7 +26,7 @@
         }
 
         header {
-            text-align: center; /* 居中标题 */
+            text-align: center;
             margin-bottom: 20px;
         }
 
@@ -51,7 +51,7 @@
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
-            align-items: center; /* 居中内容 */
+            align-items: center;
             transition: transform 0.3s, background-color 0.3s;
         }
 
@@ -63,7 +63,7 @@
         .data-box h3 {
             margin-top: 0;
             color: #007bff;
-            text-align: center; /* 居中标题 */
+            text-align: center;
             width: 100%;
         }
 
@@ -71,7 +71,7 @@
             font-size: 2em;
             margin: 10px 0 0;
             color: #333;
-            text-align: center; /* 居中数字 */
+            text-align: center;
         }
 
         .login-button {
@@ -127,7 +127,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <header>
@@ -137,31 +136,31 @@
             <div class="data-block">
                 <div class="data-box">
                     <h3>今日收入</h3>
-                    <p>0.00</p>
+                    <p id="todayIncome">0.00</p>
                 </div>
                 <div class="data-box">
                     <h3>今日订单</h3>
-                    <p>0</p>
+                    <p id="todayOrders">0</p>
                 </div>
             </div>
             <div class="data-block">
                 <div class="data-box">
                     <h3>本月收入</h3>
-                    <p>0.00</p>
+                    <p id="monthIncome">0.00</p>
                 </div>
                 <div class="data-box">
                     <h3>本月订单</h3>
-                    <p>0</p>
+                    <p id="monthOrders">0</p>
                 </div>
             </div>
             <div class="data-block">
                 <div class="data-box">
                     <h3>累计收入</h3>
-                    <p>0.00</p>
+                    <p id="totalIncome">0.00</p>
                 </div>
                 <div class="data-box">
                     <h3>累计订单</h3>
-                    <p>0</p>
+                    <p id="totalOrders">0</p>
                 </div>
             </div>
         </main>
@@ -171,6 +170,45 @@
             </div>
         </footer>
     </div>
-</body>
 
+    <script>
+        // 从 localStorage 读取数据
+        const todayIncome = localStorage.getItem('todayIncome') || '0.00';
+        const todayOrders = localStorage.getItem('todayOrders') || '0';
+        const monthIncome = localStorage.getItem('monthIncome') || '0.00';
+        const monthOrders = localStorage.getItem('monthOrders') || '0';
+        const totalIncome = localStorage.getItem('totalIncome') || '0.00';
+        const totalOrders = localStorage.getItem('totalOrders') || '0';
+
+        // 显示数据
+        document.getElementById('todayIncome').innerText = todayIncome;
+        document.getElementById('todayOrders').innerText = todayOrders;
+        document.getElementById('monthIncome').innerText = monthIncome;
+        document.getElementById('monthOrders').innerText = monthOrders;
+        document.getElementById('totalIncome').innerText = totalIncome;
+        document.getElementById('totalOrders').innerText = totalOrders;
+
+        // 监听 storage 事件以实时更新
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'todayIncome') {
+                document.getElementById('todayIncome').innerText = e.newValue;
+            }
+            if (e.key === 'todayOrders') {
+                document.getElementById('todayOrders').innerText = e.newValue;
+            }
+            if (e.key === 'monthIncome') {
+                document.getElementById('monthIncome').innerText = e.newValue;
+            }
+            if (e.key === 'monthOrders') {
+                document.getElementById('monthOrders').innerText = e.newValue;
+            }
+            if (e.key === 'totalIncome') {
+                document.getElementById('totalIncome').innerText = e.newValue;
+            }
+            if (e.key === 'totalOrders') {
+                document.getElementById('totalOrders').innerText = e.newValue;
+            }
+        });
+    </script>
+</body>
 </html>
