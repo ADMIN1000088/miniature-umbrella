@@ -1,34 +1,118 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>首页</title>
-  <style>
-    button {
-      background: linear-gradient(to right, #00ff00, #0000ff);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .header > div {
+            display: flex;
+            flex-direction: column;
+        }
+        .header > div > span:first-child {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .header > div > span:last-child {
+            font-size: 1.5em;
+            color: #333;
+        }
+        #adminButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            font-size: 1em;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            background: linear-gradient(45deg, #ff7e5f, #feb47b);
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        #adminButton:hover {
+            background: linear-gradient(45deg, #feb47b, #ff7e5f);
+        }
+        .data {
+            margin-top: 50px;
+        }
+        .data > div {
+            margin-bottom: 20px;
+        }
+        .data > div > span:first-child {
+            font-weight: bold;
+        }
+        .data > div > span:last-child {
+            margin-left: 10px;
+        }
+    </style>
 </head>
-
 <body>
-  <p>今日收入: <span id="todayIncome">0.00</span></p>
-  <p>本月收入: <span id="monthIncome">0.00</span></p>
-  <p>累计收入: <span id="totalIncome">0.00</span></p>
-  <p>激活卡数: <span id="activeCard">0</span></p>
-  <p>累计激活数量: <span id="totalActive">0</span></p>
-  <p>订单: <span id="order">0</span></p>
-  <button id="adminLogin">管理员登录按钮</button>
-  <script>
-    document.getElementById('adminLogin').addEventListener('click', function () {
-      window.location.href = 'login.html';
-    });
-  </script>
-</body>
+    <div class="header">
+        <div>
+            <span>今日收入</span>
+            <span id="todayIncome">0.00</span>
+        </div>
+        <div>
+            <span>本月收入</span>
+            <span id="monthIncome">0.00</span>
+        </div>
+        <div>
+            <span>累计收入</span>
+            <span id="totalIncome">0.00</span>
+        </div>
+        <div>
+            <span>激活卡数</span>
+            <span id="activatedCards">0</span>
+        </div>
+        <div>
+            <span>累计激活数量</span>
+            <span id="totalActivated">0</span>
+        </div>
+        <div>
+            <span>订单</span>
+            <span id="orders">0</span>
+        </div>
+    </div>
 
+    <button id="adminButton">管理员登录</button>
+
+    <script>
+        // 读取数据
+        const data = JSON.parse(localStorage.getItem('data')) || {
+            todayIncome: 0.00,
+            monthIncome: 0.00,
+            totalIncome: 0.00,
+            activatedCards: 0,
+            totalActivated: 0,
+            orders: 0
+        };
+
+        // 显示数据
+        document.getElementById('todayIncome').textContent = data.todayIncome.toFixed(2);
+        document.getElementById('monthIncome').textContent = data.monthIncome.toFixed(2);
+        document.getElementById('totalIncome').textContent = data.totalIncome.toFixed(2);
+        document.getElementById('activatedCards').textContent = data.activatedCards;
+        document.getElementById('totalActivated').textContent = data.totalActivated;
+        document.getElementById('orders').textContent = data.orders;
+
+        // 管理员登录按钮点击事件
+        document.getElementById('adminButton').addEventListener('click', () => {
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
 </html>
